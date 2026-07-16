@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as TreatmentsRouteImport } from './routes/treatments'
 import { Route as SmileGalleryRouteImport } from './routes/smile-gallery'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as ReviewsRouteImport } from './routes/reviews'
 import { Route as NewPatientsRouteImport } from './routes/new-patients'
 import { Route as DentistsRouteImport } from './routes/dentists'
@@ -31,6 +32,11 @@ const TreatmentsRoute = TreatmentsRouteImport.update({
 const SmileGalleryRoute = SmileGalleryRouteImport.update({
   id: '/smile-gallery',
   path: '/smile-gallery',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ReviewsRoute = ReviewsRouteImport.update({
@@ -97,6 +103,7 @@ export interface FileRoutesByFullPath {
   '/dentists': typeof DentistsRouteWithChildren
   '/new-patients': typeof NewPatientsRoute
   '/reviews': typeof ReviewsRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/smile-gallery': typeof SmileGalleryRoute
   '/treatments': typeof TreatmentsRouteWithChildren
   '/dentists/$slug': typeof DentistsSlugRoute
@@ -111,6 +118,7 @@ export interface FileRoutesByTo {
   '/contact': typeof ContactRoute
   '/new-patients': typeof NewPatientsRoute
   '/reviews': typeof ReviewsRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/smile-gallery': typeof SmileGalleryRoute
   '/dentists/$slug': typeof DentistsSlugRoute
   '/treatments/$slug': typeof TreatmentsSlugRoute
@@ -126,6 +134,7 @@ export interface FileRoutesById {
   '/dentists': typeof DentistsRouteWithChildren
   '/new-patients': typeof NewPatientsRoute
   '/reviews': typeof ReviewsRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/smile-gallery': typeof SmileGalleryRoute
   '/treatments': typeof TreatmentsRouteWithChildren
   '/dentists/$slug': typeof DentistsSlugRoute
@@ -143,6 +152,7 @@ export interface FileRouteTypes {
     | '/dentists'
     | '/new-patients'
     | '/reviews'
+    | '/sitemap.xml'
     | '/smile-gallery'
     | '/treatments'
     | '/dentists/$slug'
@@ -157,6 +167,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/new-patients'
     | '/reviews'
+    | '/sitemap.xml'
     | '/smile-gallery'
     | '/dentists/$slug'
     | '/treatments/$slug'
@@ -171,6 +182,7 @@ export interface FileRouteTypes {
     | '/dentists'
     | '/new-patients'
     | '/reviews'
+    | '/sitemap.xml'
     | '/smile-gallery'
     | '/treatments'
     | '/dentists/$slug'
@@ -187,6 +199,7 @@ export interface RootRouteChildren {
   DentistsRoute: typeof DentistsRouteWithChildren
   NewPatientsRoute: typeof NewPatientsRoute
   ReviewsRoute: typeof ReviewsRoute
+  SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   SmileGalleryRoute: typeof SmileGalleryRoute
   TreatmentsRoute: typeof TreatmentsRouteWithChildren
 }
@@ -205,6 +218,13 @@ declare module '@tanstack/react-router' {
       path: '/smile-gallery'
       fullPath: '/smile-gallery'
       preLoaderRoute: typeof SmileGalleryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/reviews': {
@@ -323,9 +343,20 @@ const rootRouteChildren: RootRouteChildren = {
   DentistsRoute: DentistsRouteWithChildren,
   NewPatientsRoute: NewPatientsRoute,
   ReviewsRoute: ReviewsRoute,
+  SitemapDotxmlRoute: SitemapDotxmlRoute,
   SmileGalleryRoute: SmileGalleryRoute,
   TreatmentsRoute: TreatmentsRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
