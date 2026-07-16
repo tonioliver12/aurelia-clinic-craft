@@ -41,6 +41,7 @@ function Home() {
             <p className="mt-8 max-w-md text-lg text-ink/70 leading-relaxed">
               Advanced dental care, natural-looking results and a calmer kind of patient experience in the heart of Dublin.
             </p>
+            <p className="mt-3 text-xs text-ink/40">Workflow test — local preview</p>
             <div className="mt-10 flex flex-wrap items-center gap-6">
               <Link to="/book" className="btn-primary">Book a Consultation</Link>
               <Link to="/treatments" className="link-underline">Explore our treatments <ArrowUpRight className="h-4 w-4" aria-hidden /></Link>
