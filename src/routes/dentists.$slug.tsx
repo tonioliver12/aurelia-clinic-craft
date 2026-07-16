@@ -35,7 +35,7 @@ export const Route = createFileRoute("/dentists/$slug")({
 function DentistDetail() {
   const { dentist } = Route.useLoaderData();
   const offered = dentist.treatments
-    .map((s) => treatments.find((t) => t.slug === s))
+    .map((s: string) => treatments.find((t) => t.slug === s))
     .filter((t): t is NonNullable<typeof t> => Boolean(t));
 
   return (

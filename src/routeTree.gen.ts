@@ -10,13 +10,57 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as TreatmentsRouteImport } from './routes/treatments'
+import { Route as SmileGalleryRouteImport } from './routes/smile-gallery'
+import { Route as ReviewsRouteImport } from './routes/reviews'
+import { Route as NewPatientsRouteImport } from './routes/new-patients'
+import { Route as DentistsRouteImport } from './routes/dentists'
+import { Route as ContactRouteImport } from './routes/contact'
+import { Route as BookRouteImport } from './routes/book'
+import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as TreatmentsIndexRouteImport } from './routes/treatments.index'
+import { Route as DentistsIndexRouteImport } from './routes/dentists.index'
 import { Route as TreatmentsSlugRouteImport } from './routes/treatments.$slug'
+import { Route as DentistsSlugRouteImport } from './routes/dentists.$slug'
 
 const TreatmentsRoute = TreatmentsRouteImport.update({
   id: '/treatments',
   path: '/treatments',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SmileGalleryRoute = SmileGalleryRouteImport.update({
+  id: '/smile-gallery',
+  path: '/smile-gallery',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ReviewsRoute = ReviewsRouteImport.update({
+  id: '/reviews',
+  path: '/reviews',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const NewPatientsRoute = NewPatientsRouteImport.update({
+  id: '/new-patients',
+  path: '/new-patients',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DentistsRoute = DentistsRouteImport.update({
+  id: '/dentists',
+  path: '/dentists',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BookRoute = BookRouteImport.update({
+  id: '/book',
+  path: '/book',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AboutRoute = AboutRouteImport.update({
+  id: '/about',
+  path: '/about',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -29,40 +73,121 @@ const TreatmentsIndexRoute = TreatmentsIndexRouteImport.update({
   path: '/',
   getParentRoute: () => TreatmentsRoute,
 } as any)
+const DentistsIndexRoute = DentistsIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => DentistsRoute,
+} as any)
 const TreatmentsSlugRoute = TreatmentsSlugRouteImport.update({
   id: '/$slug',
   path: '/$slug',
   getParentRoute: () => TreatmentsRoute,
 } as any)
+const DentistsSlugRoute = DentistsSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => DentistsRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/book': typeof BookRoute
+  '/contact': typeof ContactRoute
+  '/dentists': typeof DentistsRouteWithChildren
+  '/new-patients': typeof NewPatientsRoute
+  '/reviews': typeof ReviewsRoute
+  '/smile-gallery': typeof SmileGalleryRoute
   '/treatments': typeof TreatmentsRouteWithChildren
+  '/dentists/$slug': typeof DentistsSlugRoute
   '/treatments/$slug': typeof TreatmentsSlugRoute
+  '/dentists/': typeof DentistsIndexRoute
   '/treatments/': typeof TreatmentsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/book': typeof BookRoute
+  '/contact': typeof ContactRoute
+  '/new-patients': typeof NewPatientsRoute
+  '/reviews': typeof ReviewsRoute
+  '/smile-gallery': typeof SmileGalleryRoute
+  '/dentists/$slug': typeof DentistsSlugRoute
   '/treatments/$slug': typeof TreatmentsSlugRoute
+  '/dentists': typeof DentistsIndexRoute
   '/treatments': typeof TreatmentsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/book': typeof BookRoute
+  '/contact': typeof ContactRoute
+  '/dentists': typeof DentistsRouteWithChildren
+  '/new-patients': typeof NewPatientsRoute
+  '/reviews': typeof ReviewsRoute
+  '/smile-gallery': typeof SmileGalleryRoute
   '/treatments': typeof TreatmentsRouteWithChildren
+  '/dentists/$slug': typeof DentistsSlugRoute
   '/treatments/$slug': typeof TreatmentsSlugRoute
+  '/dentists/': typeof DentistsIndexRoute
   '/treatments/': typeof TreatmentsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/treatments' | '/treatments/$slug' | '/treatments/'
+  fullPaths:
+    | '/'
+    | '/about'
+    | '/book'
+    | '/contact'
+    | '/dentists'
+    | '/new-patients'
+    | '/reviews'
+    | '/smile-gallery'
+    | '/treatments'
+    | '/dentists/$slug'
+    | '/treatments/$slug'
+    | '/dentists/'
+    | '/treatments/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/treatments/$slug' | '/treatments'
-  id: '__root__' | '/' | '/treatments' | '/treatments/$slug' | '/treatments/'
+  to:
+    | '/'
+    | '/about'
+    | '/book'
+    | '/contact'
+    | '/new-patients'
+    | '/reviews'
+    | '/smile-gallery'
+    | '/dentists/$slug'
+    | '/treatments/$slug'
+    | '/dentists'
+    | '/treatments'
+  id:
+    | '__root__'
+    | '/'
+    | '/about'
+    | '/book'
+    | '/contact'
+    | '/dentists'
+    | '/new-patients'
+    | '/reviews'
+    | '/smile-gallery'
+    | '/treatments'
+    | '/dentists/$slug'
+    | '/treatments/$slug'
+    | '/dentists/'
+    | '/treatments/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AboutRoute: typeof AboutRoute
+  BookRoute: typeof BookRoute
+  ContactRoute: typeof ContactRoute
+  DentistsRoute: typeof DentistsRouteWithChildren
+  NewPatientsRoute: typeof NewPatientsRoute
+  ReviewsRoute: typeof ReviewsRoute
+  SmileGalleryRoute: typeof SmileGalleryRoute
   TreatmentsRoute: typeof TreatmentsRouteWithChildren
 }
 
@@ -73,6 +198,55 @@ declare module '@tanstack/react-router' {
       path: '/treatments'
       fullPath: '/treatments'
       preLoaderRoute: typeof TreatmentsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/smile-gallery': {
+      id: '/smile-gallery'
+      path: '/smile-gallery'
+      fullPath: '/smile-gallery'
+      preLoaderRoute: typeof SmileGalleryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/reviews': {
+      id: '/reviews'
+      path: '/reviews'
+      fullPath: '/reviews'
+      preLoaderRoute: typeof ReviewsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/new-patients': {
+      id: '/new-patients'
+      path: '/new-patients'
+      fullPath: '/new-patients'
+      preLoaderRoute: typeof NewPatientsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/dentists': {
+      id: '/dentists'
+      path: '/dentists'
+      fullPath: '/dentists'
+      preLoaderRoute: typeof DentistsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/book': {
+      id: '/book'
+      path: '/book'
+      fullPath: '/book'
+      preLoaderRoute: typeof BookRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/about': {
+      id: '/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -89,6 +263,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TreatmentsIndexRouteImport
       parentRoute: typeof TreatmentsRoute
     }
+    '/dentists/': {
+      id: '/dentists/'
+      path: '/'
+      fullPath: '/dentists/'
+      preLoaderRoute: typeof DentistsIndexRouteImport
+      parentRoute: typeof DentistsRoute
+    }
     '/treatments/$slug': {
       id: '/treatments/$slug'
       path: '/$slug'
@@ -96,8 +277,29 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TreatmentsSlugRouteImport
       parentRoute: typeof TreatmentsRoute
     }
+    '/dentists/$slug': {
+      id: '/dentists/$slug'
+      path: '/$slug'
+      fullPath: '/dentists/$slug'
+      preLoaderRoute: typeof DentistsSlugRouteImport
+      parentRoute: typeof DentistsRoute
+    }
   }
 }
+
+interface DentistsRouteChildren {
+  DentistsSlugRoute: typeof DentistsSlugRoute
+  DentistsIndexRoute: typeof DentistsIndexRoute
+}
+
+const DentistsRouteChildren: DentistsRouteChildren = {
+  DentistsSlugRoute: DentistsSlugRoute,
+  DentistsIndexRoute: DentistsIndexRoute,
+}
+
+const DentistsRouteWithChildren = DentistsRoute._addFileChildren(
+  DentistsRouteChildren,
+)
 
 interface TreatmentsRouteChildren {
   TreatmentsSlugRoute: typeof TreatmentsSlugRoute
@@ -115,6 +317,13 @@ const TreatmentsRouteWithChildren = TreatmentsRoute._addFileChildren(
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AboutRoute: AboutRoute,
+  BookRoute: BookRoute,
+  ContactRoute: ContactRoute,
+  DentistsRoute: DentistsRouteWithChildren,
+  NewPatientsRoute: NewPatientsRoute,
+  ReviewsRoute: ReviewsRoute,
+  SmileGalleryRoute: SmileGalleryRoute,
   TreatmentsRoute: TreatmentsRouteWithChildren,
 }
 export const routeTree = rootRouteImport
