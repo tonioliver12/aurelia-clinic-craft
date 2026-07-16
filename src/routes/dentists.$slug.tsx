@@ -70,7 +70,7 @@ function DentistDetail() {
           <div className="lg:col-span-7 grid gap-10 sm:grid-cols-2">
             <Section title="Areas of clinical interest">
               <ul className="mt-4 space-y-2 text-ink/80">
-                {dentist.interests.map((i, k) => <li key={k}>· {i}</li>)}
+                {dentist.interests.map((i: string, k: number) => <li key={k}>· {i}</li>)}
               </ul>
             </Section>
             <Section title="Qualifications">
